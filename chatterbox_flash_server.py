@@ -25,12 +25,12 @@ Notes on Chatterbox-Flash parameters vs. the full model:
 """
 
 import argparse
+from concurrent.futures import ThreadPoolExecutor
 import dataclasses
 import io
 import json
 import os
 import sys
-import threading
 import time
 import wave
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -123,10 +123,9 @@ def main():
     t3_dtype = next(model.t3.parameters()).dtype
     default_conds = load_builtin_conds(model)
     cache = {}  # voice name -> (wav mtime, Conditionals)
-    lock = threading.Lock()  # one synthesis at a time (model state is shared)
 
     def conds_for(voice):
-        """Return (resolved voice name, Conditionals). Caller must hold the lock."""
+        """Return (resolved voice name, Conditionals). Only called by the synthesis worker."""
         path = list_voices(args.voices).get(voice)
         if voice == DEFAULT_VOICE or path is None:
             return DEFAULT_VOICE, default_conds
@@ -147,6 +146,31 @@ def main():
         """Copy of conds with emotion_adv set (cached conds are left untouched)."""
         emotion = torch.full((1, 1, 1), exaggeration, dtype=t3_dtype, device=model.device)
         return Conditionals(dataclasses.replace(conds.t3, emotion_adv=emotion), conds.gen)
+
+    @torch.inference_mode()
+    def synthesize(text, voice, temperature, exaggeration, cfg_weight):
+        # Inference mode is thread-local; cover voice preparation and the entire
+        # generation pipeline, including any CPU watermarking, in this worker.
+        voice, conds = conds_for(voice)
+        if conds is None:
+            return voice, None
+        model.conds = with_exaggeration(conds, exaggeration)
+        wav = model.generate(
+            text,
+            temperature=temperature,
+            cfg_scale=max(cfg_weight, 0.0),
+            num_steps=args.num_steps,
+            position_temperature=args.position_temperature,
+            time_shift_tau=args.time_shift_tau,
+            n_cfm_timesteps=args.n_cfm_timesteps,
+            use_cuda_graph=use_cuda_graph,
+            backend=args.backend,
+        )
+        return voice, wav
+
+    # Serialize model access on a persistent thread so native CPU inference
+    # buffers can be reused instead of being allocated on fresh HTTP threads.
+    synthesis_worker = ThreadPoolExecutor(max_workers=1, thread_name_prefix="tts")
 
     def opt_float(req, keys, default):
         for k in keys:
@@ -191,24 +215,13 @@ def main():
                 return self.send_json(400, {"error": "temperature, exaggeration and cfgweight must be numbers"})
             started = time.perf_counter()
             try:
-                with lock:
-                    voice, conds = conds_for(voice)
-                    if conds is None:
-                        return self.send_json(400, {"error": "no built-in voice available; use a cloned voice"})
-                    model.conds = with_exaggeration(conds, exaggeration)
-                    wav = model.generate(
-                        text,
-                        temperature=temperature,
-                        cfg_scale=max(cfg_weight, 0.0),
-                        num_steps=args.num_steps,
-                        position_temperature=args.position_temperature,
-                        time_shift_tau=args.time_shift_tau,
-                        n_cfm_timesteps=args.n_cfm_timesteps,
-                        use_cuda_graph=use_cuda_graph,
-                        backend=args.backend,
-                    )
+                voice, wav = synthesis_worker.submit(
+                    synthesize, text, voice, temperature, exaggeration, cfg_weight
+                ).result()
             except Exception as e:  # noqa: BLE001
                 return self.send_json(500, {"error": str(e)})
+            if wav is None:
+                return self.send_json(400, {"error": "no built-in voice available; use a cloned voice"})
             samples = wav.reshape(-1).float().numpy()
             rate = model.sr
             took = time.perf_counter() - started
@@ -230,6 +243,9 @@ def main():
         server.serve_forever()
     except KeyboardInterrupt:
         pass
+    finally:
+        server.server_close()
+        synthesis_worker.shutdown(wait=True)
 
 
 if __name__ == "__main__":

@@ -18,11 +18,11 @@ Generation is set server-wide via --exaggeration, --cfg-weight, --temperature, -
 """
 
 import argparse
+from concurrent.futures import ThreadPoolExecutor
 import io
 import json
 import os
 import sys
-import threading
 import time
 import wave
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -108,10 +108,9 @@ def main():
     print(f"model loaded on {model.device}")
     default_conds = model.conds  # built-in voice; prepare_conditionals() overwrites model.conds
     cache = {}  # voice name -> (wav mtime, Conditionals)
-    lock = threading.Lock()  # one synthesis at a time (model state is shared)
 
     def conds_for(voice):
-        """Return (resolved voice name, Conditionals). Caller must hold the lock."""
+        """Return (resolved voice name, Conditionals). Only called by the synthesis worker."""
         path = list_voices(args.voices).get(voice)
         if voice == DEFAULT_VOICE or path is None:
             return DEFAULT_VOICE, default_conds
@@ -127,6 +126,27 @@ def main():
         cache[voice] = (mtime, model.conds)
         print(f"cloned voice '{voice}' from {path}")
         return voice, model.conds
+
+    @torch.inference_mode()
+    def synthesize(text, voice, temperature, exaggeration, cfg_weight):
+        # Inference mode is thread-local; cover voice preparation and the entire
+        # generation pipeline, including any CPU watermarking, in this worker.
+        voice, conds = conds_for(voice)
+        model.conds = conds
+        wav = model.generate(
+            text,
+            exaggeration=exaggeration,
+            cfg_weight=max(cfg_weight, 1e-6),  # 0 crashes chatterbox (t3 always runs CFG); 1e-6 ~= off
+            temperature=temperature,
+            min_p=args.min_p,
+            top_p=args.top_p,
+            repetition_penalty=args.repetition_penalty,
+        )
+        return voice, wav
+
+    # Serialize model access on a persistent thread so native CPU inference
+    # buffers can be reused instead of being allocated on fresh HTTP threads.
+    synthesis_worker = ThreadPoolExecutor(max_workers=1, thread_name_prefix="tts")
 
     class Handler(BaseHTTPRequestHandler):
         def send_body(self, status, body, ctype):
@@ -165,18 +185,9 @@ def main():
                 return self.send_json(400, {"error": "temperature, exaggeration and cfgweight must be numbers"})
             started = time.perf_counter()
             try:
-                with lock:
-                    voice, conds = conds_for(voice)
-                    model.conds = conds
-                    wav = model.generate(
-                        text,
-                        exaggeration=exaggeration,
-                        cfg_weight=max(cfg_weight, 1e-6),  # 0 crashes chatterbox (t3 always runs CFG); 1e-6 ~= off
-                        temperature=temperature,
-                        min_p=args.min_p,
-                        top_p=args.top_p,
-                        repetition_penalty=args.repetition_penalty,
-                    )
+                voice, wav = synthesis_worker.submit(
+                    synthesize, text, voice, temperature, exaggeration, cfg_weight
+                ).result()
             except Exception as e:  # noqa: BLE001
                 return self.send_json(500, {"error": str(e)})
             samples = wav.squeeze(0).numpy()
@@ -200,6 +211,9 @@ def main():
         server.serve_forever()
     except KeyboardInterrupt:
         pass
+    finally:
+        server.server_close()
+        synthesis_worker.shutdown(wait=True)
 
 
 if __name__ == "__main__":
