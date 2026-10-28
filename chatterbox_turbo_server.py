@@ -35,12 +35,12 @@ DEFAULT_VOICE = "default"
 
 
 def parse_args():
-    p = argparse.ArgumentParser(description="OpenAI-compatible Chatterbox nano TTS server")
+    p = argparse.ArgumentParser(description="OpenAI-compatible Chatterbox turbo/nano TTS server")
     p.add_argument("--host", default="127.0.0.1", help="interface to bind (0.0.0.0 = all)")
     p.add_argument("--port", type=int, default=8880)
     p.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu",
                    choices=["cpu", "cuda", "mps"], help="torch device (default: cuda if available, else cpu)")
-    p.add_argument("--nano", type=bool, default=False)
+    p.add_argument("--nano", action="store_true", help="use the nano model instead of turbo")
     p.add_argument("--voices", default=os.path.join(HERE, "voices"), help="directory of voice .wav files")
     p.add_argument("--voice", default=DEFAULT_VOICE, help="default voice name")
     p.add_argument("--threads", type=int, default=0, help="torch CPU threads (0 = torch default)")
@@ -177,7 +177,8 @@ def main():
 
     server = ThreadingHTTPServer((args.host, args.port), Handler)
     n = len(list_voices(args.voices))
-    print(f"Chatterbox nano TTS listening on http://{args.host}:{args.port}/v1/audio/speech "
+    modelname = "nano" if args.nano else "turbo"
+    print(f"Chatterbox {modelname} TTS listening on http://{args.host}:{args.port}/v1/audio/speech "
           f"(voices: default + {n} from {args.voices})")
     try:
         server.serve_forever()
