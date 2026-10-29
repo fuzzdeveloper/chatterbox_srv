@@ -15,6 +15,8 @@ Voices: each <name>.wav in the voices directory (must be > 5 s long) is cloned o
 cached. "default", or any unknown voice, uses the built-in voice of the full Chatterbox model
 (conds.pt from ResembleAI/chatterbox; Chatterbox-Flash itself ships no built-in voice).
 Only WAV output is produced ("pcm" returns raw 16-bit mono samples). "speed" is ignored.
+--pipeline optionally overlaps next-sentence T3 with decoding on CUDA (off by default;
+CUDA graphs are disabled in pipeline mode). --profile-stages logs stage timings.
 
 Notes on Chatterbox-Flash parameters vs. the full model:
   * cfg_weight is called cfg_scale. Same formula (cond + w * (cond - uncond)), but the default
@@ -25,7 +27,6 @@ Notes on Chatterbox-Flash parameters vs. the full model:
 """
 
 import argparse
-from concurrent.futures import ThreadPoolExecutor
 import dataclasses
 import io
 import json
@@ -39,6 +40,8 @@ import numpy as np
 import torch
 from huggingface_hub import hf_hub_download
 from chatterbox_flash import ChatterboxFlashTTS, Conditionals
+from chatterbox_full_timing import ModelStageProfiler, format_stage_timings
+from chatterbox_pipeline import SynthesisWorker, add_pipeline_arguments, validate_pipeline_arguments
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DEFAULT_VOICE = "default"
@@ -67,7 +70,9 @@ def parse_args():
                    help="Gumbel noise on unmask-position ranking (0 = deterministic)")
     p.add_argument("--time-shift-tau", type=float, default=0.1, help="early-decoding aggressiveness (0 = off)")
     p.add_argument("--n-cfm-timesteps", type=int, default=2, help="S3Gen vocoder flow-matching steps")
-    return p.parse_args()
+    p.add_argument("--profile-stages", action="store_true", help="log queue, synthesis, and stage timings")
+    add_pipeline_arguments(p)
+    return validate_pipeline_arguments(p, p.parse_args())
 
 
 def list_voices(voices_dir):
@@ -116,12 +121,13 @@ def main():
     if args.device == "cuda" and not torch.cuda.is_available():
         sys.exit("--device cuda requested but torch.cuda.is_available() is False")
     dtype = DTYPES[args.dtype or ("bf16" if args.device == "cuda" else "fp16")]
-    use_cuda_graph = args.device == "cuda"
+    use_cuda_graph = args.device == "cuda" and not args.pipeline
 
     model = ChatterboxFlashTTS.from_pretrained("ResembleAI/chatterbox-flash", device=args.device, dtype=dtype)
     print(f"model loaded on {model.device} ({dtype})")
     t3_dtype = next(model.t3.parameters()).dtype
     default_conds = load_builtin_conds(model)
+    profiler = ModelStageProfiler(model) if args.profile_stages else None
     cache = {}  # voice name -> (wav mtime, Conditionals)
 
     def conds_for(voice):
@@ -134,7 +140,8 @@ def main():
         if cached and cached[0] == mtime:
             return voice, cached[1]
         try:
-            conds = model.prepare_conditionals(path, exaggeration=args.exaggeration)
+            with synthesis_worker.conditioning():
+                conds = model.prepare_conditionals(path, exaggeration=args.exaggeration)
         except Exception as e:  # noqa: BLE001  (e.g. clip shorter than 5 s)
             print(f"failed to clone voice '{voice}' ({e}); using default")
             return DEFAULT_VOICE, default_conds
@@ -155,7 +162,7 @@ def main():
         if conds is None:
             return voice, None
         model.conds = with_exaggeration(conds, exaggeration)
-        wav = model.generate(
+        wav = synthesis_worker.generate(
             text,
             temperature=temperature,
             cfg_scale=max(cfg_weight, 0.0),
@@ -168,9 +175,9 @@ def main():
         )
         return voice, wav
 
-    # Serialize model access on a persistent thread so native CPU inference
-    # buffers can be reused instead of being allocated on fresh HTTP threads.
-    synthesis_worker = ThreadPoolExecutor(max_workers=1, thread_name_prefix="tts")
+    synthesis_worker = SynthesisWorker(model, "flash", pipeline=args.pipeline, profiler=profiler)
+    if args.pipeline:
+        print("CUDA sentence pipeline enabled (first request of each idle burst protected; CUDA graphs disabled)")
 
     def opt_float(req, keys, default):
         for k in keys:
@@ -215,22 +222,28 @@ def main():
                 return self.send_json(400, {"error": "temperature, exaggeration and cfgweight must be numbers"})
             started = time.perf_counter()
             try:
-                voice, wav = synthesis_worker.submit(
-                    synthesize, text, voice, temperature, exaggeration, cfg_weight
+                result = synthesis_worker.submit(
+                    synthesize, text, voice, temperature, exaggeration, cfg_weight, submitted=started
                 ).result()
+                voice, wav = result.voice, result.wav
             except Exception as e:  # noqa: BLE001
                 return self.send_json(500, {"error": str(e)})
             if wav is None:
                 return self.send_json(400, {"error": "no built-in voice available; use a cloned voice"})
             samples = wav.reshape(-1).float().numpy()
             rate = model.sr
+            encode_started = time.perf_counter()
+            pcm = req.get("response_format") == "pcm"
+            body = to_pcm16(samples) if pcm else to_wav(samples, rate)
+            encode_secs = time.perf_counter() - encode_started
             took = time.perf_counter() - started
             audio_secs = len(samples) / rate
             print(f"[{voice} t={temperature:g} ex={exaggeration:g} cfg={cfg_weight:g}] {len(text):4d} chars -> "
                   f"{audio_secs:5.1f}s audio in {took:4.2f}s (RTF {took / max(audio_secs, 0.01):.2f})")
-            if req.get("response_format") == "pcm":
-                return self.send_body(200, to_pcm16(samples), "audio/pcm")
-            self.send_body(200, to_wav(samples, rate), "audio/wav")
+            if result.stages is not None:
+                print(f"  timing: queue={result.queue_secs:.3f}s synthesis={result.synthesis_secs:.3f}s "
+                      f"{format_stage_timings(result.stages)} encode={encode_secs:.4f}s")
+            self.send_body(200, body, "audio/pcm" if pcm else "audio/wav")
 
         def log_message(self, *_):
             pass

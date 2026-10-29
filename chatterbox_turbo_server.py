@@ -14,10 +14,11 @@ cached. "default", or any unknown voice, uses the model's built-in voice.
 Only WAV output is produced ("pcm" returns raw 16-bit mono samples). "speed" is ignored.
 Sampling is set server-wide via --temperature, --top-p, --top-k, --repetition-penalty.
 (exaggeration / cfg_weight are not supported by the Turbo/nano model.)
+--pipeline optionally overlaps next-sentence T3 with decoding on CUDA (off by default).
+--profile-stages logs stage timings and separates queue wait from synthesis.
 """
 
 import argparse
-from concurrent.futures import ThreadPoolExecutor
 import io
 import json
 import os
@@ -29,6 +30,8 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import numpy as np
 import torch
 from chatterbox.tts_turbo import ChatterboxTurboTTS
+from chatterbox_full_timing import ModelStageProfiler, format_stage_timings
+from chatterbox_pipeline import SynthesisWorker, add_pipeline_arguments, validate_pipeline_arguments
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DEFAULT_VOICE = "default"
@@ -48,7 +51,9 @@ def parse_args():
     p.add_argument("--top-p", type=float, default=0.95, help="nucleus sampling cutoff (lower = steadier)")
     p.add_argument("--top-k", type=int, default=1000, help="top-k sampling cutoff (lower = steadier)")
     p.add_argument("--repetition-penalty", type=float, default=1.2, help="penalise repeated tokens/stutters")
-    return p.parse_args()
+    p.add_argument("--profile-stages", action="store_true", help="log queue, synthesis, and stage timings")
+    add_pipeline_arguments(p)
+    return validate_pipeline_arguments(p, p.parse_args())
 
 
 def list_voices(voices_dir):
@@ -88,6 +93,7 @@ def main():
     # breaks voice cloning ("expected scalar type Double but found Float"). Cast back to float32.
     _norm = model.norm_loudness
     model.norm_loudness = lambda wav, sr, **kw: np.asarray(_norm(wav, sr, **kw), dtype=np.float32)
+    profiler = ModelStageProfiler(model) if args.profile_stages else None
     default_conds = model.conds  # built-in voice; prepare_conditionals() overwrites model.conds
     cache = {}  # voice name -> (wav mtime, Conditionals)
 
@@ -101,7 +107,8 @@ def main():
         if cached and cached[0] == mtime:
             return voice, cached[1]
         try:
-            model.prepare_conditionals(path)
+            with synthesis_worker.conditioning():
+                model.prepare_conditionals(path)
         except Exception as e:  # noqa: BLE001  (e.g. clip shorter than 5 s)
             print(f"failed to clone voice '{voice}' ({e}); using default")
             return DEFAULT_VOICE, default_conds
@@ -116,13 +123,15 @@ def main():
         # builds unnecessary autograd graphs and causes substantial RAM growth.
         voice, conds = conds_for(voice)
         model.conds = conds
-        wav = model.generate(text, temperature=temperature, top_p=args.top_p, top_k=args.top_k,
-                             repetition_penalty=args.repetition_penalty)
+        wav = synthesis_worker.generate(
+            text, temperature=temperature, top_p=args.top_p, top_k=args.top_k,
+            repetition_penalty=args.repetition_penalty,
+        )
         return voice, wav
 
-    # Serialize model access on a persistent thread, rather than on each fresh
-    # HTTP thread, so native CPU inference buffers can be reused between requests.
-    synthesis_worker = ThreadPoolExecutor(max_workers=1, thread_name_prefix="tts")
+    synthesis_worker = SynthesisWorker(model, "turbo", pipeline=args.pipeline, profiler=profiler)
+    if args.pipeline:
+        print("CUDA sentence pipeline enabled (first request of each idle burst protected)")
 
     class Handler(BaseHTTPRequestHandler):
         def send_body(self, status, body, ctype):
@@ -159,18 +168,26 @@ def main():
                 return self.send_json(400, {"error": "temperature, exaggeration and cfgweight must be numbers"})
             started = time.perf_counter()
             try:
-                voice, wav = synthesis_worker.submit(synthesize, text, voice, temperature).result()
+                result = synthesis_worker.submit(
+                    synthesize, text, voice, temperature, submitted=started
+                ).result()
+                voice, wav = result.voice, result.wav
             except Exception as e:  # noqa: BLE001
                 return self.send_json(500, {"error": str(e)})
             samples = wav.squeeze(0).numpy()
             rate = model.sr
+            encode_started = time.perf_counter()
+            pcm = req.get("response_format") == "pcm"
+            body = to_pcm16(samples) if pcm else to_wav(samples, rate)
+            encode_secs = time.perf_counter() - encode_started
             took = time.perf_counter() - started
             audio_secs = len(samples) / rate
             print(f"[{voice}] {len(text):4d} chars -> {audio_secs:5.1f}s audio in {took:4.2f}s "
                   f"(RTF {took / max(audio_secs, 0.01):.2f})")
-            if req.get("response_format") == "pcm":
-                return self.send_body(200, to_pcm16(samples), "audio/pcm")
-            self.send_body(200, to_wav(samples, rate), "audio/wav")
+            if result.stages is not None:
+                print(f"  timing: queue={result.queue_secs:.3f}s synthesis={result.synthesis_secs:.3f}s "
+                      f"{format_stage_timings(result.stages)} encode={encode_secs:.4f}s")
+            self.send_body(200, body, "audio/pcm" if pcm else "audio/wav")
 
         def log_message(self, *_):
             pass
