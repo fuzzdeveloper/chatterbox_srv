@@ -1,0 +1,55 @@
+{
+  "kind": "flash",
+  "pipeline": false,
+  "concurrent_batch_secs": 7.873075000003155,
+  "first": {
+    "voice": "default",
+    "audio_secs": 1.28,
+    "wall_secs": 1.058140100001765,
+    "format": "wav"
+  },
+  "concurrent_requests": [
+    {
+      "voice": "default",
+      "audio_secs": 1.56,
+      "wall_secs": 0.7029236000016681,
+      "format": "wav"
+    },
+    {
+      "voice": "adam",
+      "audio_secs": 1.96,
+      "wall_secs": 3.186762400000589,
+      "format": "pcm"
+    },
+    {
+      "voice": "af_heart",
+      "audio_secs": 3.2,
+      "wall_secs": 4.478545900004974,
+      "format": "wav"
+    },
+    {
+      "voice": "adam",
+      "audio_secs": 2.44,
+      "wall_secs": 5.4431781999956,
+      "format": "pcm"
+    },
+    {
+      "voice": "missing-voice",
+      "audio_secs": 2.52,
+      "wall_secs": 6.357207399996696,
+      "format": "wav"
+    },
+    {
+      "voice": "af_heart",
+      "audio_secs": 4.48,
+      "wall_secs": 7.871123100005207,
+      "format": "pcm"
+    }
+  ],
+  "after_idle": {
+    "voice": "adam",
+    "audio_secs": 2.0,
+    "wall_secs": 0.8256827000004705,
+    "format": "wav"
+  }
+}

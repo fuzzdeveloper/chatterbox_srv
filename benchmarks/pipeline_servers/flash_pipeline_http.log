@@ -1,0 +1,44 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+C:\Users\Fuzz\chatterbox_srv\.venv\Lib\site-packages\diffusers\models\lora.py:393: FutureWarning: `LoRACompatibleLinear` is deprecated and will be removed in version 1.0.0. Use of `LoRACompatibleLinear` is deprecated. Please switch to PEFT backend by installing PEFT: `pip install peft`.
+  deprecate("LoRACompatibleLinear", "1.0.0", deprecation_message)
+model loaded on cuda (torch.float32)
+CUDA sentence pipeline enabled (first request of each idle burst protected; CUDA graphs disabled)
+Chatterbox-Flash TTS (cuda) listening on http://127.0.0.1:50420/v1/audio/speech (voices: default + 16 from C:\Users\Fuzz\chatterbox_srv\voices)
+C:\Users\Fuzz\AppData\Local\Programs\Python\Python313\Lib\contextlib.py:109: FutureWarning: `torch.backends.cuda.sdp_kernel()` is deprecated. In the future, this context manager will be removed. Please see `torch.nn.attention.sdpa_kernel()` for the new context manager, with updated signature.
+  self.gen = func(*args, **kwds)
+S3 Token -> Mel Inference...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|##########| 2/2 [00:00<00:00, 13.83it/s]100%|##########| 2/2 [00:00<00:00, 13.82it/s]
+[default t=0.6 ex=0.5 cfg=1]   27 chars ->   1.4s audio in 1.04s (RTF 0.76)
+  timing: queue=0.000s synthesis=1.036s tokenize=0.001s t3=0.654s flow=0.281s vocoder=0.091s encode=0.0003s
+S3 Token -> Mel Inference...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|##########| 2/2 [00:00<00:00, 15.11it/s]100%|##########| 2/2 [00:00<00:00, 15.09it/s]
+[default t=0.8 ex=0.7 cfg=0.8]   31 chars ->   2.8s audio in 1.02s (RTF 0.36)
+  timing: queue=0.000s synthesis=1.017s tokenize=0.000s t3=0.812s flow=0.152s vocoder=0.048s encode=0.0005s
+cloned voice 'adam' from C:\Users\Fuzz\chatterbox_srv\voices\adam.wav
+C:\Users\Fuzz\AppData\Local\Programs\Python\Python313\Lib\contextlib.py:109: FutureWarning: `torch.backends.cuda.sdp_kernel()` is deprecated. In the future, this context manager will be removed. Please see `torch.nn.attention.sdpa_kernel()` for the new context manager, with updated signature.
+  self.gen = func(*args, **kwds)
+S3 Token -> Mel Inference...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|##########| 2/2 [00:00<00:00, 14.53it/s]100%|##########| 2/2 [00:00<00:00, 14.51it/s]
+[adam t=0.65 ex=0.3 cfg=0.2]   33 chars ->   1.9s audio in 3.49s (RTF 1.82)
+  timing: queue=1.016s synthesis=2.476s voice_prepare=1.618s tokenize=0.000s t3=0.651s flow=0.159s vocoder=0.043s encode=0.0004s
+cloned voice 'af_heart' from C:\Users\Fuzz\chatterbox_srv\voices\af_heart.wav
+S3 Token -> Mel Inference...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|##########| 2/2 [00:00<00:00, 11.18it/s]100%|##########| 2/2 [00:00<00:00, 11.17it/s]
+[af_heart t=0.8 ex=0.7 cfg=0.8]   35 chars ->   5.0s audio in 5.26s (RTF 1.06)
+  timing: queue=3.288s synthesis=1.975s voice_prepare=0.131s tokenize=0.000s t3=1.341s flow=0.215s vocoder=0.080s encode=0.0004s
+S3 Token -> Mel Inference...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|#####     | 1/2 [00:00<00:00,  9.82it/s]100%|##########| 2/2 [00:00<00:00, 11.20it/s]
+[adam t=0.65 ex=0.3 cfg=0.2]   37 chars ->   2.5s audio in 6.05s (RTF 2.44)
+  timing: queue=4.966s synthesis=1.084s tokenize=0.000s t3=0.803s flow=0.213s vocoder=0.063s encode=0.0002s
+S3 Token -> Mel Inference...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|##########| 2/2 [00:00<00:00, 12.55it/s]100%|##########| 2/2 [00:00<00:00, 12.54it/s]
+[default t=0.8 ex=0.7 cfg=0.8]   42 chars ->   2.7s audio in 6.99s (RTF 2.61)
+  timing: queue=5.771s synthesis=1.219s tokenize=0.000s t3=0.977s flow=0.185s vocoder=0.053s encode=0.0003s
+S3 Token -> Mel Inference...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|##########| 2/2 [00:00<00:00, 14.56it/s]100%|##########| 2/2 [00:00<00:00, 14.55it/s]
+[af_heart t=0.65 ex=0.3 cfg=0.2]   40 chars ->   5.0s audio in 8.44s (RTF 1.68)
+  timing: queue=6.749s synthesis=1.694s tokenize=0.000s t3=1.457s flow=0.162s vocoder=0.072s encode=0.0004s
+S3 Token -> Mel Inference...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|##########| 2/2 [00:00<00:00, 14.49it/s]100%|##########| 2/2 [00:00<00:00, 14.47it/s]
+[adam t=0.6 ex=0.5 cfg=1]   36 chars ->   2.1s audio in 0.89s (RTF 0.43)
+  timing: queue=0.000s synthesis=0.891s tokenize=0.000s t3=0.684s flow=0.160s vocoder=0.044s encode=0.0003s

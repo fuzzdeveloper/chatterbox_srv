@@ -1,0 +1,78 @@
+[
+  {
+    "kind": "full",
+    "nano": false,
+    "voice": "default",
+    "samples": 49920,
+    "tokens": 52,
+    "max_waveform_delta": 2.1085143089294434e-06,
+    "serial_secs": 3.1281287999954657,
+    "pipeline_secs": 2.9383783000012045,
+    "settings": {
+      "temperature": 0.8,
+      "exaggeration": 0.5,
+      "cfg_weight": 0.5
+    },
+    "pipeline_stages": {
+      "tokenize": {
+        "wall_ms": 0.26249999791616574,
+        "elapsed_ms": 0.0017600000137463212
+      },
+      "t3": {
+        "wall_ms": 2169.117899997218,
+        "elapsed_ms": 2168.84228515625
+      },
+      "flow": {
+        "wall_ms": 721.6727000050014,
+        "elapsed_ms": 722.1729125976562
+      },
+      "vocoder": {
+        "wall_ms": 42.63150000042515,
+        "elapsed_ms": 41.744384765625
+      },
+      "decode": {
+        "wall_ms": 764.5949999932782,
+        "elapsed_ms": 763.9275512695312
+      }
+    }
+  },
+  {
+    "kind": "full",
+    "nano": false,
+    "voice": "adam",
+    "samples": 58560,
+    "tokens": 61,
+    "max_waveform_delta": 1.0728836059570312e-06,
+    "serial_secs": 3.3467564999955357,
+    "pipeline_secs": 3.414978399996471,
+    "settings": {
+      "temperature": 0.65,
+      "exaggeration": 0.7,
+      "cfg_weight": 0.2,
+      "top_p": 0.9,
+      "min_p": 0.03
+    },
+    "pipeline_stages": {
+      "tokenize": {
+        "wall_ms": 0.2460999967297539,
+        "elapsed_ms": 0.0029120000544935465
+      },
+      "t3": {
+        "wall_ms": 2585.8751999985543,
+        "elapsed_ms": 2585.564208984375
+      },
+      "flow": {
+        "wall_ms": 777.4759000021731,
+        "elapsed_ms": 777.9164428710938
+      },
+      "vocoder": {
+        "wall_ms": 46.33450000255834,
+        "elapsed_ms": 45.5813102722168
+      },
+      "decode": {
+        "wall_ms": 824.0981999988435,
+        "elapsed_ms": 823.5079345703125
+      }
+    }
+  }
+]

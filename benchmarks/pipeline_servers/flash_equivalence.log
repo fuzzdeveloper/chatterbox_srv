@@ -1,0 +1,15 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+C:\Users\Fuzz\chatterbox_srv\.venv\Lib\site-packages\diffusers\models\lora.py:393: FutureWarning: `LoRACompatibleLinear` is deprecated and will be removed in version 1.0.0. Use of `LoRACompatibleLinear` is deprecated. Please switch to PEFT backend by installing PEFT: `pip install peft`.
+  deprecate("LoRACompatibleLinear", "1.0.0", deprecation_message)
+C:\Users\Fuzz\AppData\Local\Programs\Python\Python313\Lib\contextlib.py:109: FutureWarning: `torch.backends.cuda.sdp_kernel()` is deprecated. In the future, this context manager will be removed. Please see `torch.nn.attention.sdpa_kernel()` for the new context manager, with updated signature.
+  self.gen = func(*args, **kwds)
+S3 Token -> Mel Inference...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|##########| 2/2 [00:00<00:00, 14.34it/s]100%|##########| 2/2 [00:00<00:00, 14.32it/s]
+S3 Token -> Mel Inference...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|##########| 2/2 [00:00<00:00, 14.47it/s]100%|##########| 2/2 [00:00<00:00, 14.45it/s]
+{"kind": "flash", "nano": false, "voice": "default", "samples": 58560, "tokens": 61, "max_waveform_delta": 2.1457672119140625e-06, "serial_secs": 1.1023071999952663, "pipeline_secs": 0.9007182999994257, "settings": {"temperature": 0.6, "cfg_scale": 0, "num_steps": 3, "backend": "torch", "use_cuda_graph": false}}
+S3 Token -> Mel Inference...
+  0%|          | 0/3 [00:00<?, ?it/s] 67%|######6   | 2/3 [00:00<00:00, 14.66it/s]100%|##########| 3/3 [00:00<00:00, 14.72it/s]
+S3 Token -> Mel Inference...
+  0%|          | 0/3 [00:00<?, ?it/s] 67%|######6   | 2/3 [00:00<00:00, 14.52it/s]100%|##########| 3/3 [00:00<00:00, 14.57it/s]
+{"kind": "flash", "nano": false, "voice": "adam", "samples": 52800, "tokens": 55, "max_waveform_delta": 5.559995770454407e-07, "serial_secs": 1.0107979999957024, "pipeline_secs": 0.985438100004103, "settings": {"temperature": 0.7, "cfg_scale": 0.8, "num_steps": 3, "backend": "torch", "use_cuda_graph": false, "position_temperature": 2.0, "time_shift_tau": 0.15, "n_cfm_timesteps": 3}}

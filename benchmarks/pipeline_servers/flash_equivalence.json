@@ -1,0 +1,83 @@
+[
+  {
+    "kind": "flash",
+    "nano": false,
+    "voice": "default",
+    "samples": 58560,
+    "tokens": 61,
+    "max_waveform_delta": 2.1457672119140625e-06,
+    "serial_secs": 1.1023071999952663,
+    "pipeline_secs": 0.9007182999994257,
+    "settings": {
+      "temperature": 0.6,
+      "cfg_scale": 0,
+      "num_steps": 3,
+      "backend": "torch",
+      "use_cuda_graph": false
+    },
+    "pipeline_stages": {
+      "tokenize": {
+        "wall_ms": 0.29010000434936956,
+        "elapsed_ms": 0.0038079998921602964
+      },
+      "t3": {
+        "wall_ms": 690.2143999977852,
+        "elapsed_ms": 688.7555541992188
+      },
+      "flow": {
+        "wall_ms": 159.63389999524225,
+        "elapsed_ms": 159.54534912109375
+      },
+      "vocoder": {
+        "wall_ms": 46.05209999863291,
+        "elapsed_ms": 45.75743865966797
+      },
+      "decode": {
+        "wall_ms": 205.96950000617653,
+        "elapsed_ms": 205.31385803222656
+      }
+    }
+  },
+  {
+    "kind": "flash",
+    "nano": false,
+    "voice": "adam",
+    "samples": 52800,
+    "tokens": 55,
+    "max_waveform_delta": 5.559995770454407e-07,
+    "serial_secs": 1.0107979999957024,
+    "pipeline_secs": 0.985438100004103,
+    "settings": {
+      "temperature": 0.7,
+      "cfg_scale": 0.8,
+      "num_steps": 3,
+      "backend": "torch",
+      "use_cuda_graph": false,
+      "position_temperature": 2.0,
+      "time_shift_tau": 0.15,
+      "n_cfm_timesteps": 3
+    },
+    "pipeline_stages": {
+      "tokenize": {
+        "wall_ms": 0.27069999487139285,
+        "elapsed_ms": 0.0030720001086592674
+      },
+      "t3": {
+        "wall_ms": 698.4298000024864,
+        "elapsed_ms": 696.9369506835938
+      },
+      "flow": {
+        "wall_ms": 230.7918999940739,
+        "elapsed_ms": 231.08741760253906
+      },
+      "vocoder": {
+        "wall_ms": 51.38779999833787,
+        "elapsed_ms": 50.733055114746094
+      },
+      "decode": {
+        "wall_ms": 282.46219999709865,
+        "elapsed_ms": 281.8312683105469
+      }
+    }
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "profile": false,
+    "wav_secs": 2.12,
+    "pcm_bytes": 109440,
+    "wall_secs": 8.790543600000092
+  },
+  {
+    "profile": true,
+    "wav_secs": 2.12,
+    "pcm_bytes": 115200,
+    "wall_secs": 8.39583809999749
+  }
+]

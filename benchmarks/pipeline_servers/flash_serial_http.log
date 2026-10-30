@@ -1,0 +1,43 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+C:\Users\Fuzz\chatterbox_srv\.venv\Lib\site-packages\diffusers\models\lora.py:393: FutureWarning: `LoRACompatibleLinear` is deprecated and will be removed in version 1.0.0. Use of `LoRACompatibleLinear` is deprecated. Please switch to PEFT backend by installing PEFT: `pip install peft`.
+  deprecate("LoRACompatibleLinear", "1.0.0", deprecation_message)
+model loaded on cuda (torch.float32)
+Chatterbox-Flash TTS (cuda) listening on http://127.0.0.1:50366/v1/audio/speech (voices: default + 16 from C:\Users\Fuzz\chatterbox_srv\voices)
+C:\Users\Fuzz\AppData\Local\Programs\Python\Python313\Lib\contextlib.py:109: FutureWarning: `torch.backends.cuda.sdp_kernel()` is deprecated. In the future, this context manager will be removed. Please see `torch.nn.attention.sdpa_kernel()` for the new context manager, with updated signature.
+  self.gen = func(*args, **kwds)
+S3 Token -> Mel Inference...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|##########| 2/2 [00:00<00:00, 13.62it/s]100%|##########| 2/2 [00:00<00:00, 13.60it/s]
+[default t=0.6 ex=0.5 cfg=1]   27 chars ->   1.3s audio in 1.04s (RTF 0.81)
+  timing: queue=0.001s synthesis=1.041s tokenize=0.001s t3=0.655s flow=0.232s vocoder=0.146s encode=0.0004s
+S3 Token -> Mel Inference...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|##########| 2/2 [00:00<00:00, 15.00it/s]100%|##########| 2/2 [00:00<00:00, 14.98it/s]
+[default t=0.8 ex=0.7 cfg=0.8]   31 chars ->   1.6s audio in 0.70s (RTF 0.45)
+  timing: queue=0.000s synthesis=0.700s tokenize=0.000s t3=0.500s flow=0.153s vocoder=0.043s encode=0.0003s
+cloned voice 'adam' from C:\Users\Fuzz\chatterbox_srv\voices\adam.wav
+C:\Users\Fuzz\AppData\Local\Programs\Python\Python313\Lib\contextlib.py:109: FutureWarning: `torch.backends.cuda.sdp_kernel()` is deprecated. In the future, this context manager will be removed. Please see `torch.nn.attention.sdpa_kernel()` for the new context manager, with updated signature.
+  self.gen = func(*args, **kwds)
+S3 Token -> Mel Inference...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|##########| 2/2 [00:00<00:00, 14.50it/s]100%|##########| 2/2 [00:00<00:00, 14.48it/s]
+[adam t=0.65 ex=0.3 cfg=0.2]   33 chars ->   2.0s audio in 3.18s (RTF 1.62)
+  timing: queue=0.700s synthesis=2.484s voice_prepare=1.633s tokenize=0.000s t3=0.643s flow=0.160s vocoder=0.045s encode=0.0004s
+cloned voice 'af_heart' from C:\Users\Fuzz\chatterbox_srv\voices\af_heart.wav
+S3 Token -> Mel Inference...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|##########| 2/2 [00:00<00:00, 14.58it/s]100%|##########| 2/2 [00:00<00:00, 14.56it/s]
+[af_heart t=0.8 ex=0.7 cfg=0.8]   35 chars ->   3.2s audio in 4.48s (RTF 1.40)
+  timing: queue=3.183s synthesis=1.291s voice_prepare=0.126s tokenize=0.000s t3=0.948s flow=0.160s vocoder=0.054s encode=0.0005s
+S3 Token -> Mel Inference...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|##########| 2/2 [00:00<00:00, 14.55it/s]100%|##########| 2/2 [00:00<00:00, 14.53it/s]
+[adam t=0.65 ex=0.3 cfg=0.2]   37 chars ->   2.4s audio in 5.44s (RTF 2.23)
+  timing: queue=4.474s synthesis=0.965s tokenize=0.000s t3=0.747s flow=0.160s vocoder=0.054s encode=0.0003s
+S3 Token -> Mel Inference...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|##########| 2/2 [00:00<00:00, 15.41it/s]100%|##########| 2/2 [00:00<00:00, 15.39it/s]
+[default t=0.8 ex=0.7 cfg=0.8]   42 chars ->   2.5s audio in 6.35s (RTF 2.52)
+  timing: queue=5.439s synthesis=0.914s tokenize=0.000s t3=0.718s flow=0.149s vocoder=0.044s encode=0.0003s
+S3 Token -> Mel Inference...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|##########| 2/2 [00:00<00:00, 14.94it/s]100%|##########| 2/2 [00:00<00:00, 14.92it/s]
+[af_heart t=0.65 ex=0.3 cfg=0.2]   40 chars ->   4.5s audio in 7.87s (RTF 1.76)
+  timing: queue=6.353s synthesis=1.514s tokenize=0.000s t3=1.293s flow=0.159s vocoder=0.058s encode=0.0004s
+S3 Token -> Mel Inference...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|##########| 2/2 [00:00<00:00, 15.23it/s]100%|##########| 2/2 [00:00<00:00, 15.21it/s]
+[adam t=0.6 ex=0.5 cfg=1]   36 chars ->   2.0s audio in 0.82s (RTF 0.41)
+  timing: queue=0.000s synthesis=0.824s tokenize=0.000s t3=0.625s flow=0.153s vocoder=0.043s encode=0.0003s

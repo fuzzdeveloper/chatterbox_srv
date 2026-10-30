@@ -1,0 +1,1376 @@
+{
+  "gpu": "NVIDIA GeForce GTX 1080 Ti",
+  "torch": "2.14.1+cu126",
+  "cpu_threads": 6,
+  "arguments": {
+    "voice": "adam",
+    "rounds": 3,
+    "sentences": 4,
+    "texts": null,
+    "threads": 0,
+    "seed": 1234,
+    "temperature": 0.8,
+    "exaggeration": 0.5,
+    "cfg_weight": 0.5,
+    "output": "benchmarks/full_pipeline/results.json",
+    "save_audio": true
+  },
+  "runs": [
+    {
+      "mode": "serial",
+      "round": 0,
+      "wall_secs": 17.254425599996466,
+      "audio_secs": 12.64,
+      "rtf": 1.3650653164554165,
+      "first_audio_secs": 3.945997199996782,
+      "overlap_secs": 0.0,
+      "peak_allocated_mib": 3243.943359375,
+      "peak_reserved_mib": 3860.0,
+      "requests": [
+        {
+          "index": 0,
+          "text": "Hello there! I hope you are having a wonderful day.",
+          "tokens": 72,
+          "token_hash": "f8d5a0ce19779fe3d7b44d136a53beba50a8e7488509b2795fcdf5128f04d9af",
+          "audio_secs": 2.88,
+          "completed_secs": 3.945997199996782,
+          "peak_amplitude": 0.6361855268478394,
+          "stages": {
+            "tokenize": {
+              "wall_ms": 0.13169999874662608,
+              "elapsed_ms": 0.0016319999704137444,
+              "start_ms": 0.30640000104904175,
+              "end_ms": 0.30803200602531433
+            },
+            "t3": {
+              "wall_ms": 2960.7191999966744,
+              "elapsed_ms": 2960.400390625,
+              "start_ms": 0.719871997833252,
+              "end_ms": 2961.120361328125
+            },
+            "tokens": {
+              "wall_ms": 2962.0279999944614,
+              "elapsed_ms": 2962.216064453125,
+              "start_ms": 0.005119999870657921,
+              "end_ms": 2962.22119140625
+            },
+            "flow": {
+              "wall_ms": 940.250499996182,
+              "elapsed_ms": 940.9688720703125,
+              "start_ms": 2962.25390625,
+              "end_ms": 3903.222900390625
+            },
+            "vocoder": {
+              "wall_ms": 42.66780000034487,
+              "elapsed_ms": 41.973758697509766,
+              "start_ms": 3903.223876953125,
+              "end_ms": 3945.197509765625
+            },
+            "decode": {
+              "wall_ms": 983.2135000033304,
+              "elapsed_ms": 982.951416015625,
+              "start_ms": 2962.25244140625,
+              "end_ms": 3945.20361328125
+            },
+            "copy_to_cpu": {
+              "wall_ms": 0.1979000007850118,
+              "elapsed_ms": 0.2025279998779297,
+              "start_ms": 3945.205810546875,
+              "end_ms": 3945.408203125
+            }
+          }
+        },
+        {
+          "index": 1,
+          "text": "The little robot looked out of the window and wondered where all the birds had gone.",
+          "tokens": 81,
+          "token_hash": "fa8739483163613bc830269a5fd19f9efd92f61ad0884db4d460d45ca38cf7c7",
+          "audio_secs": 3.24,
+          "completed_secs": 8.215363999996043,
+          "peak_amplitude": 0.4415208399295807,
+          "stages": {
+            "tokenize": {
+              "wall_ms": 0.16029999824240804,
+              "elapsed_ms": 0.0014720000326633453,
+              "start_ms": 3948.116455078125,
+              "end_ms": 3948.1181640625
+            },
+            "t3": {
+              "wall_ms": 3334.8839999962365,
+              "elapsed_ms": 3334.52685546875,
+              "start_ms": 3948.560302734375,
+              "end_ms": 7283.08740234375
+            },
+            "tokens": {
+              "wall_ms": 3336.2712000016472,
+              "elapsed_ms": 3336.446044921875,
+              "start_ms": 3947.75341796875,
+              "end_ms": 7284.19921875
+            },
+            "flow": {
+              "wall_ms": 882.7785999965272,
+              "elapsed_ms": 883.4751586914062,
+              "start_ms": 7284.2333984375,
+              "end_ms": 8167.70849609375
+            },
+            "vocoder": {
+              "wall_ms": 47.156799999356735,
+              "elapsed_ms": 46.46006393432617,
+              "start_ms": 8167.70947265625,
+              "end_ms": 8214.169921875
+            },
+            "decode": {
+              "wall_ms": 930.2049000034458,
+              "elapsed_ms": 929.9437255859375,
+              "start_ms": 7284.23193359375,
+              "end_ms": 8214.17578125
+            },
+            "copy_to_cpu": {
+              "wall_ms": 0.20049999875482172,
+              "elapsed_ms": 0.2059839963912964,
+              "start_ms": 8214.1767578125,
+              "end_ms": 8214.3828125
+            }
+          }
+        },
+        {
+          "index": 2,
+          "text": "That is a good question. Let me think about it for a moment.",
+          "tokens": 66,
+          "token_hash": "151e54f1f44d6dbf11213251dd822f69c63288c8519e57724fb9481005b77cdb",
+          "audio_secs": 2.64,
+          "completed_secs": 11.995484399994893,
+          "peak_amplitude": 0.7001739144325256,
+          "stages": {
+            "tokenize": {
+              "wall_ms": 0.1714000027277507,
+              "elapsed_ms": 0.0014720000326633453,
+              "start_ms": 8216.341796875,
+              "end_ms": 8216.34375
+            },
+            "t3": {
+              "wall_ms": 2923.847999998543,
+              "elapsed_ms": 2923.527099609375,
+              "start_ms": 8216.7744140625,
+              "end_ms": 11140.3017578125
+            },
+            "tokens": {
+              "wall_ms": 2925.2836000014213,
+              "elapsed_ms": 2925.488037109375,
+              "start_ms": 8215.9755859375,
+              "end_ms": 11141.462890625
+            },
+            "flow": {
+              "wall_ms": 801.593000003777,
+              "elapsed_ms": 802.4713134765625,
+              "start_ms": 11141.4970703125,
+              "end_ms": 11943.96875
+            },
+            "vocoder": {
+              "wall_ms": 50.81149999750778,
+              "elapsed_ms": 49.9865608215332,
+              "start_ms": 11943.970703125,
+              "end_ms": 11993.95703125
+            },
+            "decode": {
+              "wall_ms": 852.7010999969207,
+              "elapsed_ms": 852.4677124023438,
+              "start_ms": 11141.49609375,
+              "end_ms": 11993.9638671875
+            },
+            "copy_to_cpu": {
+              "wall_ms": 0.19719999545486644,
+              "elapsed_ms": 0.19123199582099915,
+              "start_ms": 11993.96484375,
+              "end_ms": 11994.15625
+            }
+          }
+        },
+        {
+          "index": 3,
+          "text": "We can prepare the next sentence while the previous one is being converted into audio.",
+          "tokens": 97,
+          "token_hash": "67a5ca175138794d591817ab91b906257d2ad960ccc56ecfd7086987c81184dc",
+          "audio_secs": 3.88,
+          "completed_secs": 17.252768899998046,
+          "peak_amplitude": 0.6465998888015747,
+          "stages": {
+            "tokenize": {
+              "wall_ms": 0.20429999858606607,
+              "elapsed_ms": 0.0014720000326633453,
+              "start_ms": 11996.24609375,
+              "end_ms": 11996.248046875
+            },
+            "t3": {
+              "wall_ms": 4273.084200001904,
+              "elapsed_ms": 4272.63818359375,
+              "start_ms": 11996.6826171875,
+              "end_ms": 16269.3203125
+            },
+            "tokens": {
+              "wall_ms": 4274.559999998019,
+              "elapsed_ms": 4274.62451171875,
+              "start_ms": 11995.8486328125,
+              "end_ms": 16270.4736328125
+            },
+            "flow": {
+              "wall_ms": 919.8226000007708,
+              "elapsed_ms": 920.7329711914062,
+              "start_ms": 16270.5078125,
+              "end_ms": 17191.240234375
+            },
+            "vocoder": {
+              "wall_ms": 60.37140000262298,
+              "elapsed_ms": 59.48313522338867,
+              "start_ms": 17191.2421875,
+              "end_ms": 17250.7265625
+            },
+            "decode": {
+              "wall_ms": 980.4817000040202,
+              "elapsed_ms": 980.2247924804688,
+              "start_ms": 16270.505859375,
+              "end_ms": 17250.73046875
+            },
+            "copy_to_cpu": {
+              "wall_ms": 0.22170000011101365,
+              "elapsed_ms": 0.22710399329662323,
+              "start_ms": 17250.732421875,
+              "end_ms": 17250.9609375
+            }
+          }
+        }
+      ]
+    },
+    {
+      "mode": "pipeline",
+      "round": 0,
+      "wall_secs": 14.546983200001705,
+      "audio_secs": 12.64,
+      "rtf": 1.1508689240507677,
+      "first_audio_secs": 4.035941199996159,
+      "overlap_secs": 3.29183544921875,
+      "peak_allocated_mib": 3263.2255859375,
+      "peak_reserved_mib": 3860.0,
+      "requests": [
+        {
+          "index": 0,
+          "text": "Hello there! I hope you are having a wonderful day.",
+          "tokens": 72,
+          "token_hash": "f8d5a0ce19779fe3d7b44d136a53beba50a8e7488509b2795fcdf5128f04d9af",
+          "audio_secs": 2.88,
+          "completed_secs": 4.035941199996159,
+          "peak_amplitude": 0.5665479898452759,
+          "stages": {
+            "tokenize": {
+              "wall_ms": 0.167500002135057,
+              "elapsed_ms": 0.0015040000434964895,
+              "start_ms": 0.4429759979248047,
+              "end_ms": 0.4444800019264221
+            },
+            "t3": {
+              "wall_ms": 2906.047000004037,
+              "elapsed_ms": 2905.66455078125,
+              "start_ms": 0.997376024723053,
+              "end_ms": 2906.661865234375
+            },
+            "tokens": {
+              "wall_ms": 2907.618099998217,
+              "elapsed_ms": 2907.597900390625,
+              "start_ms": 0.005152000114321709,
+              "end_ms": 2907.60302734375
+            },
+            "flow": {
+              "wall_ms": 1071.5987000003224,
+              "elapsed_ms": 1071.9471435546875,
+              "start_ms": 2908.064453125,
+              "end_ms": 3980.011474609375
+            },
+            "vocoder": {
+              "wall_ms": 55.277299994486384,
+              "elapsed_ms": 54.86899185180664,
+              "start_ms": 3980.013671875,
+              "end_ms": 4034.882568359375
+            },
+            "decode": {
+              "wall_ms": 1127.215200001956,
+              "elapsed_ms": 1127.253173828125,
+              "start_ms": 2907.63671875,
+              "end_ms": 4034.8896484375
+            },
+            "copy_to_cpu": {
+              "wall_ms": 0.4008999967481941,
+              "elapsed_ms": 0.342303991317749,
+              "start_ms": 4034.892822265625,
+              "end_ms": 4035.235107421875
+            }
+          }
+        },
+        {
+          "index": 1,
+          "text": "The little robot looked out of the window and wondered where all the birds had gone.",
+          "tokens": 81,
+          "token_hash": "fa8739483163613bc830269a5fd19f9efd92f61ad0884db4d460d45ca38cf7c7",
+          "audio_secs": 3.24,
+          "completed_secs": 7.588938199995027,
+          "peak_amplitude": 0.5259649157524109,
+          "stages": {
+            "tokenize": {
+              "wall_ms": 0.16619999951217324,
+              "elapsed_ms": 0.0021120000164955854,
+              "start_ms": 2908.06591796875,
+              "end_ms": 2908.068115234375
+            },
+            "t3": {
+              "wall_ms": 3539.991999998165,
+              "elapsed_ms": 3539.59423828125,
+              "start_ms": 2908.5634765625,
+              "end_ms": 6448.15771484375
+            },
+            "tokens": {
+              "wall_ms": 3541.5151999986847,
+              "elapsed_ms": 3541.6494140625,
+              "start_ms": 2907.60498046875,
+              "end_ms": 6449.25439453125
+            },
+            "flow": {
+              "wall_ms": 1078.4583999993629,
+              "elapsed_ms": 1078.6883544921875,
+              "start_ms": 6449.70361328125,
+              "end_ms": 7528.39208984375
+            },
+            "vocoder": {
+              "wall_ms": 59.39039999793749,
+              "elapsed_ms": 59.11040115356445,
+              "start_ms": 7528.3935546875,
+              "end_ms": 7587.50390625
+            },
+            "decode": {
+              "wall_ms": 1138.2297000018298,
+              "elapsed_ms": 1138.2210693359375,
+              "start_ms": 6449.29052734375,
+              "end_ms": 7587.51171875
+            },
+            "copy_to_cpu": {
+              "wall_ms": 0.38809999387012795,
+              "elapsed_ms": 0.38998401165008545,
+              "start_ms": 7587.51416015625,
+              "end_ms": 7587.904296875
+            }
+          }
+        },
+        {
+          "index": 2,
+          "text": "That is a good question. Let me think about it for a moment.",
+          "tokens": 66,
+          "token_hash": "151e54f1f44d6dbf11213251dd822f69c63288c8519e57724fb9481005b77cdb",
+          "audio_secs": 2.64,
+          "completed_secs": 10.44885069999873,
+          "peak_amplitude": 0.5083268284797668,
+          "stages": {
+            "tokenize": {
+              "wall_ms": 0.17619999562157318,
+              "elapsed_ms": 0.0021440000273287296,
+              "start_ms": 6449.705078125,
+              "end_ms": 6449.70703125
+            },
+            "t3": {
+              "wall_ms": 2967.2066000057384,
+              "elapsed_ms": 2966.88330078125,
+              "start_ms": 6450.20458984375,
+              "end_ms": 9417.087890625
+            },
+            "tokens": {
+              "wall_ms": 2968.7618000025395,
+              "elapsed_ms": 2968.838134765625,
+              "start_ms": 6449.25634765625,
+              "end_ms": 9418.0947265625
+            },
+            "flow": {
+              "wall_ms": 976.2138000005507,
+              "elapsed_ms": 976.5919189453125,
+              "start_ms": 9418.5556640625,
+              "end_ms": 10395.1474609375
+            },
+            "vocoder": {
+              "wall_ms": 52.57499999424908,
+              "elapsed_ms": 52.085758209228516,
+              "start_ms": 10395.1494140625,
+              "end_ms": 10447.2353515625
+            },
+            "decode": {
+              "wall_ms": 1029.129099995771,
+              "elapsed_ms": 1029.115234375,
+              "start_ms": 9418.126953125,
+              "end_ms": 10447.2421875
+            },
+            "copy_to_cpu": {
+              "wall_ms": 0.2858000007108785,
+              "elapsed_ms": 0.30793601274490356,
+              "start_ms": 10447.2451171875,
+              "end_ms": 10447.5537109375
+            }
+          }
+        },
+        {
+          "index": 3,
+          "text": "We can prepare the next sentence while the previous one is being converted into audio.",
+          "tokens": 97,
+          "token_hash": "67a5ca175138794d591817ab91b906257d2ad960ccc56ecfd7086987c81184dc",
+          "audio_secs": 3.88,
+          "completed_secs": 14.545495099999243,
+          "peak_amplitude": 0.6431539058685303,
+          "stages": {
+            "tokenize": {
+              "wall_ms": 0.19269999756943434,
+              "elapsed_ms": 0.0021120000164955854,
+              "start_ms": 9418.556640625,
+              "end_ms": 9418.55859375
+            },
+            "t3": {
+              "wall_ms": 4167.066199996043,
+              "elapsed_ms": 4166.6201171875,
+              "start_ms": 9419.0400390625,
+              "end_ms": 13585.66015625
+            },
+            "tokens": {
+              "wall_ms": 4168.59029999614,
+              "elapsed_ms": 4168.67919921875,
+              "start_ms": 9418.095703125,
+              "end_ms": 13586.775390625
+            },
+            "flow": {
+              "wall_ms": 904.1403000010177,
+              "elapsed_ms": 905.2880249023438,
+              "start_ms": 13586.806640625,
+              "end_ms": 14492.0947265625
+            },
+            "vocoder": {
+              "wall_ms": 52.620399997977074,
+              "elapsed_ms": 51.48057556152344,
+              "start_ms": 14492.095703125,
+              "end_ms": 14543.576171875
+            },
+            "decode": {
+              "wall_ms": 957.0407999999588,
+              "elapsed_ms": 956.7772216796875,
+              "start_ms": 13586.8046875,
+              "end_ms": 14543.58203125
+            },
+            "copy_to_cpu": {
+              "wall_ms": 0.22650000028079376,
+              "elapsed_ms": 0.23046399652957916,
+              "start_ms": 14543.5830078125,
+              "end_ms": 14543.8134765625
+            }
+          }
+        }
+      ]
+    },
+    {
+      "mode": "pipeline",
+      "round": 1,
+      "wall_secs": 15.652665699999488,
+      "audio_secs": 12.64,
+      "rtf": 1.2383438053797062,
+      "first_audio_secs": 4.528430900005333,
+      "overlap_secs": 3.3025146484375,
+      "peak_allocated_mib": 3260.619140625,
+      "peak_reserved_mib": 3860.0,
+      "requests": [
+        {
+          "index": 0,
+          "text": "Hello there! I hope you are having a wonderful day.",
+          "tokens": 72,
+          "token_hash": "f8d5a0ce19779fe3d7b44d136a53beba50a8e7488509b2795fcdf5128f04d9af",
+          "audio_secs": 2.88,
+          "completed_secs": 4.528430900005333,
+          "peak_amplitude": 0.5636517405509949,
+          "stages": {
+            "tokenize": {
+              "wall_ms": 0.1343000039923936,
+              "elapsed_ms": 0.0015040000434964895,
+              "start_ms": 0.3248960077762604,
+              "end_ms": 0.3264000117778778
+            },
+            "t3": {
+              "wall_ms": 3393.465599998308,
+              "elapsed_ms": 3393.0947265625,
+              "start_ms": 0.7526400089263916,
+              "end_ms": 3393.847412109375
+            },
+            "tokens": {
+              "wall_ms": 3394.882000000507,
+              "elapsed_ms": 3395.186767578125,
+              "start_ms": 0.005119999870657921,
+              "end_ms": 3395.19189453125
+            },
+            "flow": {
+              "wall_ms": 1076.1667000042507,
+              "elapsed_ms": 1076.324951171875,
+              "start_ms": 3395.22607421875,
+              "end_ms": 4471.55078125
+            },
+            "vocoder": {
+              "wall_ms": 56.15180000313558,
+              "elapsed_ms": 55.91244888305664,
+              "start_ms": 4471.55322265625,
+              "end_ms": 4527.46533203125
+            },
+            "decode": {
+              "wall_ms": 1132.6190999971004,
+              "elapsed_ms": 1132.247314453125,
+              "start_ms": 3395.224365234375,
+              "end_ms": 4527.4716796875
+            },
+            "copy_to_cpu": {
+              "wall_ms": 0.3156000020680949,
+              "elapsed_ms": 0.28067201375961304,
+              "start_ms": 4527.4755859375,
+              "end_ms": 4527.75634765625
+            }
+          }
+        },
+        {
+          "index": 1,
+          "text": "The little robot looked out of the window and wondered where all the birds had gone.",
+          "tokens": 81,
+          "token_hash": "fa8739483163613bc830269a5fd19f9efd92f61ad0884db4d460d45ca38cf7c7",
+          "audio_secs": 3.24,
+          "completed_secs": 8.288266600000497,
+          "peak_amplitude": 0.45011815428733826,
+          "stages": {
+            "tokenize": {
+              "wall_ms": 0.15800000255694613,
+              "elapsed_ms": 0.0014720000326633453,
+              "start_ms": 3395.668212890625,
+              "end_ms": 3395.669677734375
+            },
+            "t3": {
+              "wall_ms": 3752.579300002253,
+              "elapsed_ms": 3752.321044921875,
+              "start_ms": 3395.962890625,
+              "end_ms": 7148.28369140625
+            },
+            "tokens": {
+              "wall_ms": 3754.0766000020085,
+              "elapsed_ms": 3754.06591796875,
+              "start_ms": 3395.19384765625,
+              "end_ms": 7149.259765625
+            },
+            "flow": {
+              "wall_ms": 1077.540999998746,
+              "elapsed_ms": 1077.9058837890625,
+              "start_ms": 7149.71826171875,
+              "end_ms": 8227.6240234375
+            },
+            "vocoder": {
+              "wall_ms": 59.837400003743824,
+              "elapsed_ms": 59.282432556152344,
+              "start_ms": 8227.6259765625,
+              "end_ms": 8286.908203125
+            },
+            "decode": {
+              "wall_ms": 1137.700200000836,
+              "elapsed_ms": 1137.6251220703125,
+              "start_ms": 7149.29345703125,
+              "end_ms": 8286.9189453125
+            },
+            "copy_to_cpu": {
+              "wall_ms": 0.2119999990100041,
+              "elapsed_ms": 0.22735999524593353,
+              "start_ms": 8287.013671875,
+              "end_ms": 8287.2412109375
+            }
+          }
+        },
+        {
+          "index": 2,
+          "text": "That is a good question. Let me think about it for a moment.",
+          "tokens": 66,
+          "token_hash": "151e54f1f44d6dbf11213251dd822f69c63288c8519e57724fb9481005b77cdb",
+          "audio_secs": 2.64,
+          "completed_secs": 11.527565200005483,
+          "peak_amplitude": 0.4276123344898224,
+          "stages": {
+            "tokenize": {
+              "wall_ms": 0.1976000057766214,
+              "elapsed_ms": 0.0021440000273287296,
+              "start_ms": 7149.7197265625,
+              "end_ms": 7149.7216796875
+            },
+            "t3": {
+              "wall_ms": 3339.343200001167,
+              "elapsed_ms": 3338.95068359375,
+              "start_ms": 7150.25,
+              "end_ms": 10489.2001953125
+            },
+            "tokens": {
+              "wall_ms": 3340.972400001192,
+              "elapsed_ms": 3341.3447265625,
+              "start_ms": 7149.26171875,
+              "end_ms": 10490.6064453125
+            },
+            "flow": {
+              "wall_ms": 978.7023999961093,
+              "elapsed_ms": 978.8472290039062,
+              "start_ms": 10490.6708984375,
+              "end_ms": 11469.517578125
+            },
+            "vocoder": {
+              "wall_ms": 56.600199997774325,
+              "elapsed_ms": 56.38041687011719,
+              "start_ms": 11469.51953125,
+              "end_ms": 11525.900390625
+            },
+            "decode": {
+              "wall_ms": 1035.668699994858,
+              "elapsed_ms": 1035.2373046875,
+              "start_ms": 10490.6689453125,
+              "end_ms": 11525.90625
+            },
+            "copy_to_cpu": {
+              "wall_ms": 0.3333000058773905,
+              "elapsed_ms": 0.3285439908504486,
+              "start_ms": 11525.9091796875,
+              "end_ms": 11526.23828125
+            }
+          }
+        },
+        {
+          "index": 3,
+          "text": "We can prepare the next sentence while the previous one is being converted into audio.",
+          "tokens": 97,
+          "token_hash": "67a5ca175138794d591817ab91b906257d2ad960ccc56ecfd7086987c81184dc",
+          "audio_secs": 3.88,
+          "completed_secs": 15.652008700002625,
+          "peak_amplitude": 0.6955813765525818,
+          "stages": {
+            "tokenize": {
+              "wall_ms": 0.20530000620055944,
+              "elapsed_ms": 0.0015360000543296337,
+              "start_ms": 10491.130859375,
+              "end_ms": 10491.1318359375
+            },
+            "t3": {
+              "wall_ms": 4199.717399998917,
+              "elapsed_ms": 4199.2763671875,
+              "start_ms": 10491.5693359375,
+              "end_ms": 14690.845703125
+            },
+            "tokens": {
+              "wall_ms": 4201.280600005703,
+              "elapsed_ms": 4201.35009765625,
+              "start_ms": 10490.6083984375,
+              "end_ms": 14691.958984375
+            },
+            "flow": {
+              "wall_ms": 904.917399995611,
+              "elapsed_ms": 906.0574951171875,
+              "start_ms": 14691.9873046875,
+              "end_ms": 15598.044921875
+            },
+            "vocoder": {
+              "wall_ms": 53.046299995912705,
+              "elapsed_ms": 51.9813117980957,
+              "start_ms": 15598.046875,
+              "end_ms": 15650.0283203125
+            },
+            "decode": {
+              "wall_ms": 958.264799999597,
+              "elapsed_ms": 958.0474853515625,
+              "start_ms": 14691.986328125,
+              "end_ms": 15650.033203125
+            },
+            "copy_to_cpu": {
+              "wall_ms": 0.2842999965650961,
+              "elapsed_ms": 0.2816320061683655,
+              "start_ms": 15650.0361328125,
+              "end_ms": 15650.3173828125
+            }
+          }
+        }
+      ]
+    },
+    {
+      "mode": "serial",
+      "round": 1,
+      "wall_secs": 17.497723499996937,
+      "audio_secs": 12.64,
+      "rtf": 1.3843135680377323,
+      "first_audio_secs": 3.9107952999984263,
+      "overlap_secs": 0.0,
+      "peak_allocated_mib": 3243.943359375,
+      "peak_reserved_mib": 3860.0,
+      "requests": [
+        {
+          "index": 0,
+          "text": "Hello there! I hope you are having a wonderful day.",
+          "tokens": 72,
+          "token_hash": "f8d5a0ce19779fe3d7b44d136a53beba50a8e7488509b2795fcdf5128f04d9af",
+          "audio_secs": 2.88,
+          "completed_secs": 3.9107952999984263,
+          "peak_amplitude": 0.5969417691230774,
+          "stages": {
+            "tokenize": {
+              "wall_ms": 0.17080000543501228,
+              "elapsed_ms": 0.0014720000326633453,
+              "start_ms": 0.37958401441574097,
+              "end_ms": 0.381056010723114
+            },
+            "t3": {
+              "wall_ms": 2934.148099993763,
+              "elapsed_ms": 2933.794921875,
+              "start_ms": 0.8632320165634155,
+              "end_ms": 2934.657958984375
+            },
+            "tokens": {
+              "wall_ms": 2935.587200001464,
+              "elapsed_ms": 2935.739501953125,
+              "start_ms": 0.005119999870657921,
+              "end_ms": 2935.74462890625
+            },
+            "flow": {
+              "wall_ms": 931.6518999985419,
+              "elapsed_ms": 932.3455200195312,
+              "start_ms": 2935.777587890625,
+              "end_ms": 3868.123046875
+            },
+            "vocoder": {
+              "wall_ms": 42.45459999947343,
+              "elapsed_ms": 41.78636932373047,
+              "start_ms": 3868.125244140625,
+              "end_ms": 3909.91162109375
+            },
+            "decode": {
+              "wall_ms": 974.4013999952585,
+              "elapsed_ms": 974.1406860351562,
+              "start_ms": 2935.77587890625,
+              "end_ms": 3909.916748046875
+            },
+            "copy_to_cpu": {
+              "wall_ms": 0.20029999723192304,
+              "elapsed_ms": 0.20259200036525726,
+              "start_ms": 3909.918701171875,
+              "end_ms": 3910.121337890625
+            }
+          }
+        },
+        {
+          "index": 1,
+          "text": "The little robot looked out of the window and wondered where all the birds had gone.",
+          "tokens": 81,
+          "token_hash": "fa8739483163613bc830269a5fd19f9efd92f61ad0884db4d460d45ca38cf7c7",
+          "audio_secs": 3.24,
+          "completed_secs": 8.781304800002545,
+          "peak_amplitude": 0.4711669683456421,
+          "stages": {
+            "tokenize": {
+              "wall_ms": 0.20849999418715015,
+              "elapsed_ms": 0.0014720000326633453,
+              "start_ms": 3911.21826171875,
+              "end_ms": 3911.2197265625
+            },
+            "t3": {
+              "wall_ms": 3932.6127999956952,
+              "elapsed_ms": 3932.1650390625,
+              "start_ms": 3911.699462890625,
+              "end_ms": 7843.86474609375
+            },
+            "tokens": {
+              "wall_ms": 3934.1459999996005,
+              "elapsed_ms": 3934.233642578125,
+              "start_ms": 3910.801513671875,
+              "end_ms": 7845.03515625
+            },
+            "flow": {
+              "wall_ms": 887.0934000005946,
+              "elapsed_ms": 887.7826538085938,
+              "start_ms": 7845.06884765625,
+              "end_ms": 8732.8515625
+            },
+            "vocoder": {
+              "wall_ms": 47.782499997993,
+              "elapsed_ms": 47.101951599121094,
+              "start_ms": 8732.853515625,
+              "end_ms": 8779.955078125
+            },
+            "decode": {
+              "wall_ms": 935.1520999989589,
+              "elapsed_ms": 934.89306640625,
+              "start_ms": 7845.0673828125,
+              "end_ms": 8779.9599609375
+            },
+            "copy_to_cpu": {
+              "wall_ms": 0.20909999875584617,
+              "elapsed_ms": 0.21270400285720825,
+              "start_ms": 8779.9619140625,
+              "end_ms": 8780.1748046875
+            }
+          }
+        },
+        {
+          "index": 2,
+          "text": "That is a good question. Let me think about it for a moment.",
+          "tokens": 66,
+          "token_hash": "151e54f1f44d6dbf11213251dd822f69c63288c8519e57724fb9481005b77cdb",
+          "audio_secs": 2.64,
+          "completed_secs": 12.460050300003786,
+          "peak_amplitude": 0.41565707325935364,
+          "stages": {
+            "tokenize": {
+              "wall_ms": 0.15469999925699085,
+              "elapsed_ms": 0.0014720000326633453,
+              "start_ms": 8781.1455078125,
+              "end_ms": 8781.146484375
+            },
+            "t3": {
+              "wall_ms": 2827.7951999989455,
+              "elapsed_ms": 2827.45654296875,
+              "start_ms": 8781.5966796875,
+              "end_ms": 11609.052734375
+            },
+            "tokens": {
+              "wall_ms": 2829.1362000018125,
+              "elapsed_ms": 2829.372314453125,
+              "start_ms": 8780.802734375,
+              "end_ms": 11610.17578125
+            },
+            "flow": {
+              "wall_ms": 804.8516999988351,
+              "elapsed_ms": 805.4951782226562,
+              "start_ms": 11610.2099609375,
+              "end_ms": 12415.705078125
+            },
+            "vocoder": {
+              "wall_ms": 43.28990000067279,
+              "elapsed_ms": 42.6690559387207,
+              "start_ms": 12415.70703125,
+              "end_ms": 12458.3759765625
+            },
+            "decode": {
+              "wall_ms": 848.4348999991198,
+              "elapsed_ms": 848.1729736328125,
+              "start_ms": 11610.2080078125,
+              "end_ms": 12458.380859375
+            },
+            "copy_to_cpu": {
+              "wall_ms": 0.18699999782256782,
+              "elapsed_ms": 0.19100800156593323,
+              "start_ms": 12458.3837890625,
+              "end_ms": 12458.57421875
+            }
+          }
+        },
+        {
+          "index": 3,
+          "text": "We can prepare the next sentence while the previous one is being converted into audio.",
+          "tokens": 97,
+          "token_hash": "67a5ca175138794d591817ab91b906257d2ad960ccc56ecfd7086987c81184dc",
+          "audio_secs": 3.88,
+          "completed_secs": 17.497216499999922,
+          "peak_amplitude": 0.6219945549964905,
+          "stages": {
+            "tokenize": {
+              "wall_ms": 0.16230000619543716,
+              "elapsed_ms": 0.0014720000326633453,
+              "start_ms": 12459.5283203125,
+              "end_ms": 12459.5302734375
+            },
+            "t3": {
+              "wall_ms": 4059.4376000008197,
+              "elapsed_ms": 4059.010986328125,
+              "start_ms": 12459.951171875,
+              "end_ms": 16518.962890625
+            },
+            "tokens": {
+              "wall_ms": 4060.7865000056336,
+              "elapsed_ms": 4060.90234375,
+              "start_ms": 12459.1787109375,
+              "end_ms": 16520.08203125
+            },
+            "flow": {
+              "wall_ms": 920.9005999946385,
+              "elapsed_ms": 921.7421875,
+              "start_ms": 16520.115234375,
+              "end_ms": 17441.857421875
+            },
+            "vocoder": {
+              "wall_ms": 54.011200001696125,
+              "elapsed_ms": 53.17427062988281,
+              "start_ms": 17441.859375,
+              "end_ms": 17495.033203125
+            },
+            "decode": {
+              "wall_ms": 975.1952000005986,
+              "elapsed_ms": 974.9261474609375,
+              "start_ms": 16520.11328125,
+              "end_ms": 17495.0390625
+            },
+            "copy_to_cpu": {
+              "wall_ms": 0.22390000231098384,
+              "elapsed_ms": 0.22780799865722656,
+              "start_ms": 17495.041015625,
+              "end_ms": 17495.26953125
+            }
+          }
+        }
+      ]
+    },
+    {
+      "mode": "serial",
+      "round": 2,
+      "wall_secs": 16.73065879999922,
+      "audio_secs": 12.64,
+      "rtf": 1.3236280696201914,
+      "first_audio_secs": 4.038875099999132,
+      "overlap_secs": 0.0,
+      "peak_allocated_mib": 3243.943359375,
+      "peak_reserved_mib": 3860.0,
+      "requests": [
+        {
+          "index": 0,
+          "text": "Hello there! I hope you are having a wonderful day.",
+          "tokens": 72,
+          "token_hash": "f8d5a0ce19779fe3d7b44d136a53beba50a8e7488509b2795fcdf5128f04d9af",
+          "audio_secs": 2.88,
+          "completed_secs": 4.038875099999132,
+          "peak_amplitude": 0.6009846925735474,
+          "stages": {
+            "tokenize": {
+              "wall_ms": 0.13469999976223335,
+              "elapsed_ms": 0.0015040000434964895,
+              "start_ms": 0.3258560001850128,
+              "end_ms": 0.32736000418663025
+            },
+            "t3": {
+              "wall_ms": 3132.1729000046616,
+              "elapsed_ms": 3131.828125,
+              "start_ms": 0.7577599883079529,
+              "end_ms": 3132.5859375
+            },
+            "tokens": {
+              "wall_ms": 3133.5036999953445,
+              "elapsed_ms": 3133.67236328125,
+              "start_ms": 0.005119999870657921,
+              "end_ms": 3133.677490234375
+            },
+            "flow": {
+              "wall_ms": 863.7417000063579,
+              "elapsed_ms": 864.6743774414062,
+              "start_ms": 3133.70556640625,
+              "end_ms": 3998.380126953125
+            },
+            "vocoder": {
+              "wall_ms": 40.5862999978126,
+              "elapsed_ms": 39.67078399658203,
+              "start_ms": 3998.381103515625,
+              "end_ms": 4038.0517578125
+            },
+            "decode": {
+              "wall_ms": 904.6057000014116,
+              "elapsed_ms": 904.3528442382812,
+              "start_ms": 3133.7041015625,
+              "end_ms": 4038.056884765625
+            },
+            "copy_to_cpu": {
+              "wall_ms": 0.19700000120792538,
+              "elapsed_ms": 0.19952000677585602,
+              "start_ms": 4038.05908203125,
+              "end_ms": 4038.258544921875
+            }
+          }
+        },
+        {
+          "index": 1,
+          "text": "The little robot looked out of the window and wondered where all the birds had gone.",
+          "tokens": 81,
+          "token_hash": "fa8739483163613bc830269a5fd19f9efd92f61ad0884db4d460d45ca38cf7c7",
+          "audio_secs": 3.24,
+          "completed_secs": 8.241103000000294,
+          "peak_amplitude": 0.43492066860198975,
+          "stages": {
+            "tokenize": {
+              "wall_ms": 0.22809999791206792,
+              "elapsed_ms": 0.0014720000326633453,
+              "start_ms": 4039.3955078125,
+              "end_ms": 4039.39697265625
+            },
+            "t3": {
+              "wall_ms": 3265.5616000047303,
+              "elapsed_ms": 3265.174560546875,
+              "start_ms": 4039.87353515625,
+              "end_ms": 7305.0478515625
+            },
+            "tokens": {
+              "wall_ms": 3267.0656999980565,
+              "elapsed_ms": 3267.25927734375,
+              "start_ms": 4038.96630859375,
+              "end_ms": 7306.2255859375
+            },
+            "flow": {
+              "wall_ms": 886.1240999976872,
+              "elapsed_ms": 886.7825317382812,
+              "start_ms": 7306.27001953125,
+              "end_ms": 8193.052734375
+            },
+            "vocoder": {
+              "wall_ms": 47.51280000346014,
+              "elapsed_ms": 46.82444763183594,
+              "start_ms": 8193.0537109375,
+              "end_ms": 8239.8779296875
+            },
+            "decode": {
+              "wall_ms": 933.9194999993197,
+              "elapsed_ms": 933.6146850585938,
+              "start_ms": 7306.2685546875,
+              "end_ms": 8239.8828125
+            },
+            "copy_to_cpu": {
+              "wall_ms": 0.1979000007850118,
+              "elapsed_ms": 0.20281599462032318,
+              "start_ms": 8239.8857421875,
+              "end_ms": 8240.087890625
+            }
+          }
+        },
+        {
+          "index": 2,
+          "text": "That is a good question. Let me think about it for a moment.",
+          "tokens": 66,
+          "token_hash": "151e54f1f44d6dbf11213251dd822f69c63288c8519e57724fb9481005b77cdb",
+          "audio_secs": 2.64,
+          "completed_secs": 11.814698399997724,
+          "peak_amplitude": 0.41323280334472656,
+          "stages": {
+            "tokenize": {
+              "wall_ms": 0.15239999629557133,
+              "elapsed_ms": 0.0014720000326633453,
+              "start_ms": 8241.1259765625,
+              "end_ms": 8241.126953125
+            },
+            "t3": {
+              "wall_ms": 2723.2106999945245,
+              "elapsed_ms": 2722.905029296875,
+              "start_ms": 8241.5380859375,
+              "end_ms": 10964.443359375
+            },
+            "tokens": {
+              "wall_ms": 2724.5636000006925,
+              "elapsed_ms": 2724.770751953125,
+              "start_ms": 8240.80078125,
+              "end_ms": 10965.5712890625
+            },
+            "flow": {
+              "wall_ms": 803.6714999980177,
+              "elapsed_ms": 804.30615234375,
+              "start_ms": 10965.6064453125,
+              "end_ms": 11769.912109375
+            },
+            "vocoder": {
+              "wall_ms": 43.84869999921648,
+              "elapsed_ms": 43.226112365722656,
+              "start_ms": 11769.9140625,
+              "end_ms": 11813.140625
+            },
+            "decode": {
+              "wall_ms": 847.8066999959992,
+              "elapsed_ms": 847.541015625,
+              "start_ms": 10965.6044921875,
+              "end_ms": 11813.1455078125
+            },
+            "copy_to_cpu": {
+              "wall_ms": 0.19800000154646114,
+              "elapsed_ms": 0.20150400698184967,
+              "start_ms": 11813.1474609375,
+              "end_ms": 11813.349609375
+            }
+          }
+        },
+        {
+          "index": 3,
+          "text": "We can prepare the next sentence while the previous one is being converted into audio.",
+          "tokens": 97,
+          "token_hash": "67a5ca175138794d591817ab91b906257d2ad960ccc56ecfd7086987c81184dc",
+          "audio_secs": 3.88,
+          "completed_secs": 16.7301651999951,
+          "peak_amplitude": 0.7129582762718201,
+          "stages": {
+            "tokenize": {
+              "wall_ms": 0.16279999545076862,
+              "elapsed_ms": 0.0014720000326633453,
+              "start_ms": 11814.296875,
+              "end_ms": 11814.298828125
+            },
+            "t3": {
+              "wall_ms": 3954.6537999995053,
+              "elapsed_ms": 3954.231201171875,
+              "start_ms": 11814.7216796875,
+              "end_ms": 15768.953125
+            },
+            "tokens": {
+              "wall_ms": 3956.0039000061806,
+              "elapsed_ms": 3956.14306640625,
+              "start_ms": 11813.9501953125,
+              "end_ms": 15770.09375
+            },
+            "flow": {
+              "wall_ms": 905.7409000015468,
+              "elapsed_ms": 907.1764526367188,
+              "start_ms": 15770.12109375,
+              "end_ms": 16677.296875
+            },
+            "vocoder": {
+              "wall_ms": 52.25649999920279,
+              "elapsed_ms": 50.81497573852539,
+              "start_ms": 16677.298828125,
+              "end_ms": 16728.11328125
+            },
+            "decode": {
+              "wall_ms": 958.2736000011209,
+              "elapsed_ms": 958.0001220703125,
+              "start_ms": 15770.119140625,
+              "end_ms": 16728.119140625
+            },
+            "copy_to_cpu": {
+              "wall_ms": 0.22190000163391232,
+              "elapsed_ms": 0.22780799865722656,
+              "start_ms": 16728.12109375,
+              "end_ms": 16728.34765625
+            }
+          }
+        }
+      ]
+    },
+    {
+      "mode": "pipeline",
+      "round": 2,
+      "wall_secs": 15.378923900003429,
+      "audio_secs": 12.64,
+      "rtf": 1.2166870174053346,
+      "first_audio_secs": 4.326480399999127,
+      "overlap_secs": 3.29751953125,
+      "peak_allocated_mib": 3262.0830078125,
+      "peak_reserved_mib": 3860.0,
+      "requests": [
+        {
+          "index": 0,
+          "text": "Hello there! I hope you are having a wonderful day.",
+          "tokens": 72,
+          "token_hash": "f8d5a0ce19779fe3d7b44d136a53beba50a8e7488509b2795fcdf5128f04d9af",
+          "audio_secs": 2.88,
+          "completed_secs": 4.326480399999127,
+          "peak_amplitude": 0.6088609099388123,
+          "stages": {
+            "tokenize": {
+              "wall_ms": 0.13500000204658136,
+              "elapsed_ms": 0.0014720000326633453,
+              "start_ms": 0.32902398705482483,
+              "end_ms": 0.33049601316452026
+            },
+            "t3": {
+              "wall_ms": 3194.7943999985,
+              "elapsed_ms": 3194.44384765625,
+              "start_ms": 0.7557119727134705,
+              "end_ms": 3195.199462890625
+            },
+            "tokens": {
+              "wall_ms": 3196.196600001713,
+              "elapsed_ms": 3196.48974609375,
+              "start_ms": 0.006144000217318535,
+              "end_ms": 3196.495849609375
+            },
+            "flow": {
+              "wall_ms": 1074.0149000048405,
+              "elapsed_ms": 1074.7694091796875,
+              "start_ms": 3196.530029296875,
+              "end_ms": 4271.2998046875
+            },
+            "vocoder": {
+              "wall_ms": 54.95570000493899,
+              "elapsed_ms": 54.242305755615234,
+              "start_ms": 4271.3017578125,
+              "end_ms": 4325.5439453125
+            },
+            "decode": {
+              "wall_ms": 1129.31870000466,
+              "elapsed_ms": 1129.0224609375,
+              "start_ms": 3196.528564453125,
+              "end_ms": 4325.55126953125
+            },
+            "copy_to_cpu": {
+              "wall_ms": 0.2865999995265156,
+              "elapsed_ms": 0.27980801463127136,
+              "start_ms": 4325.55419921875,
+              "end_ms": 4325.833984375
+            }
+          }
+        },
+        {
+          "index": 1,
+          "text": "The little robot looked out of the window and wondered where all the birds had gone.",
+          "tokens": 81,
+          "token_hash": "fa8739483163613bc830269a5fd19f9efd92f61ad0884db4d460d45ca38cf7c7",
+          "audio_secs": 3.24,
+          "completed_secs": 8.140538799998467,
+          "peak_amplitude": 0.48504069447517395,
+          "stages": {
+            "tokenize": {
+              "wall_ms": 0.16089999553514645,
+              "elapsed_ms": 0.0014720000326633453,
+              "start_ms": 3196.966064453125,
+              "end_ms": 3196.967529296875
+            },
+            "t3": {
+              "wall_ms": 3804.710199998226,
+              "elapsed_ms": 3804.368896484375,
+              "start_ms": 3197.35595703125,
+              "end_ms": 7001.72509765625
+            },
+            "tokens": {
+              "wall_ms": 3806.253700000525,
+              "elapsed_ms": 3806.2080078125,
+              "start_ms": 3196.497802734375,
+              "end_ms": 7002.7060546875
+            },
+            "flow": {
+              "wall_ms": 1079.1424999988521,
+              "elapsed_ms": 1079.3338623046875,
+              "start_ms": 7003.1533203125,
+              "end_ms": 8082.4873046875
+            },
+            "vocoder": {
+              "wall_ms": 57.03570000332547,
+              "elapsed_ms": 56.797183990478516,
+              "start_ms": 8082.4892578125,
+              "end_ms": 8139.28662109375
+            },
+            "decode": {
+              "wall_ms": 1136.526900001627,
+              "elapsed_ms": 1136.5518798828125,
+              "start_ms": 7002.73974609375,
+              "end_ms": 8139.29150390625
+            },
+            "copy_to_cpu": {
+              "wall_ms": 0.27240000054007396,
+              "elapsed_ms": 0.23836800456047058,
+              "start_ms": 8139.29345703125,
+              "end_ms": 8139.5322265625
+            }
+          }
+        },
+        {
+          "index": 2,
+          "text": "That is a good question. Let me think about it for a moment.",
+          "tokens": 66,
+          "token_hash": "151e54f1f44d6dbf11213251dd822f69c63288c8519e57724fb9481005b77cdb",
+          "audio_secs": 2.64,
+          "completed_secs": 11.036506800002826,
+          "peak_amplitude": 0.41973820328712463,
+          "stages": {
+            "tokenize": {
+              "wall_ms": 0.18140000611310825,
+              "elapsed_ms": 0.0021440000273287296,
+              "start_ms": 7003.15478515625,
+              "end_ms": 7003.1572265625
+            },
+            "t3": {
+              "wall_ms": 2996.0443999952986,
+              "elapsed_ms": 2995.70068359375,
+              "start_ms": 7003.64208984375,
+              "end_ms": 9999.3427734375
+            },
+            "tokens": {
+              "wall_ms": 2997.5672000000486,
+              "elapsed_ms": 2997.89013671875,
+              "start_ms": 7002.7080078125,
+              "end_ms": 10000.59765625
+            },
+            "flow": {
+              "wall_ms": 980.875900000683,
+              "elapsed_ms": 981.2146606445312,
+              "start_ms": 10000.6328125,
+              "end_ms": 10981.8466796875
+            },
+            "vocoder": {
+              "wall_ms": 53.595000004861504,
+              "elapsed_ms": 53.1701774597168,
+              "start_ms": 10981.8486328125,
+              "end_ms": 11035.01953125
+            },
+            "decode": {
+              "wall_ms": 1034.779299996444,
+              "elapsed_ms": 1034.39453125,
+              "start_ms": 10000.630859375,
+              "end_ms": 11035.025390625
+            },
+            "copy_to_cpu": {
+              "wall_ms": 0.20059999951627105,
+              "elapsed_ms": 0.19072000682353973,
+              "start_ms": 11035.02734375,
+              "end_ms": 11035.2177734375
+            }
+          }
+        },
+        {
+          "index": 3,
+          "text": "We can prepare the next sentence while the previous one is being converted into audio.",
+          "tokens": 97,
+          "token_hash": "67a5ca175138794d591817ab91b906257d2ad960ccc56ecfd7086987c81184dc",
+          "audio_secs": 3.88,
+          "completed_secs": 15.378418300002522,
+          "peak_amplitude": 0.4868973195552826,
+          "stages": {
+            "tokenize": {
+              "wall_ms": 0.17490000027464703,
+              "elapsed_ms": 0.0014720000326633453,
+              "start_ms": 10001.0048828125,
+              "end_ms": 10001.0068359375
+            },
+            "t3": {
+              "wall_ms": 4337.359299999662,
+              "elapsed_ms": 4337.03515625,
+              "start_ms": 10001.3505859375,
+              "end_ms": 14338.3857421875
+            },
+            "tokens": {
+              "wall_ms": 4338.923199997225,
+              "elapsed_ms": 4338.9755859375,
+              "start_ms": 10000.599609375,
+              "end_ms": 14339.576171875
+            },
+            "flow": {
+              "wall_ms": 983.2755000024918,
+              "elapsed_ms": 984.2353515625,
+              "start_ms": 14339.609375,
+              "end_ms": 15323.8447265625
+            },
+            "vocoder": {
+              "wall_ms": 53.595199999108445,
+              "elapsed_ms": 52.63462448120117,
+              "start_ms": 15323.8466796875,
+              "end_ms": 15376.4814453125
+            },
+            "decode": {
+              "wall_ms": 1037.14719999698,
+              "elapsed_ms": 1036.878662109375,
+              "start_ms": 14339.607421875,
+              "end_ms": 15376.486328125
+            },
+            "copy_to_cpu": {
+              "wall_ms": 0.2286000017193146,
+              "elapsed_ms": 0.2327679991722107,
+              "start_ms": 15376.48828125,
+              "end_ms": 15376.7216796875
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "serial_median_secs": 17.254425599996466,
+    "pipeline_median_secs": 15.378923900003429,
+    "speedup": 1.1219527264838485,
+    "time_saved_percent": 10.869684934591051
+  }
+}

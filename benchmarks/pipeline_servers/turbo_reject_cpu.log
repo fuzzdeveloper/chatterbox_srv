@@ -1,0 +1,9 @@
+usage: chatterbox_turbo_server.py [-h] [--host HOST] [--port PORT]
+                                  [--device {cpu,cuda,mps}] [--nano]
+                                  [--voices VOICES] [--voice VOICE]
+                                  [--threads THREADS]
+                                  [--temperature TEMPERATURE] [--top-p TOP_P]
+                                  [--top-k TOP_K]
+                                  [--repetition-penalty REPETITION_PENALTY]
+                                  [--profile-stages] [--pipeline]
+chatterbox_turbo_server.py: error: --pipeline requires --device cuda (CPU/MPS overlap is not supported)
