@@ -35,3 +35,5 @@ git clone https://github.com/resemble-ai/chatterbox.git
 .venv\scripts\pip install --no-deps -e chatterbox/
 git clone https://github.com/resemble-ai/chatterbox-flash.git
 .venv\scripts\pip install --no-deps -e chatterbox-flash/
+
+pause

@@ -20,3 +20,5 @@ git clone https://github.com/resemble-ai/chatterbox-flash.git
 rem now we replace the torch libs with cuda ones while listening to python whinge about them being "incompatible"
 .venv\Scripts\pip uninstall touch torchaudio 
 .venv\Scripts\pip install torch torchaudio --index-url https://download.pytorch.org/whl/cu126
+
+pause
