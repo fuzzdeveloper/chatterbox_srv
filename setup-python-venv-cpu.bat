@@ -1,11 +1,18 @@
-# replace \scripts\ with /bin/ for linux
+@echo off
+echo Setting up venv suitable for running chatterbox on CPU
+echo Note: this was tested against Python 3.13.0
+cd /d "%~dp0"
 
 python -m venv .venv
+IF %ERRORLEVEL% NEQ 0 (
+    echo Error running python -m venv - is python installed?
+    exit /b %ERRORLEVEL%
+)
 
-# cpu specific torch libs
+rem cpu specific torch libs
 .venv\scripts\pip install torch torchaudio --index-url https://download.pytorch.org/whl/cpu
 
-# now we install deps that are ACTUALLY NEEDED while trying not to screw up the above
+rem now we install deps that are ACTUALLY NEEDED while trying not to screw up the above or bring in a pile of cuda stuff
 .venv\scripts\pip install numpy
 .venv\scripts\pip install librosa
 .venv\scripts\pip install huggingface_hub
@@ -21,8 +28,10 @@ python -m venv .venv
 .venv\scripts\pip install pillow
 .venv\scripts\pip install pyloudnorm
 
-# these come from github because pip ones are out of date
+rem these come from github because pip ones are out of date
 git clone https://github.com/resemble-ai/Perth.git
 .venv\scripts\pip install --no-deps -e Perth/
 git clone https://github.com/resemble-ai/chatterbox.git
 .venv\scripts\pip install --no-deps -e chatterbox/
+git clone https://github.com/resemble-ai/chatterbox-flash.git
+.venv\scripts\pip install --no-deps -e chatterbox-flash/
