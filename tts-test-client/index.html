@@ -216,7 +216,7 @@ $('downloadBtn').addEventListener('click', () => {
   if (!lastAudioBlob) return;
   const a = document.createElement('a');
   a.href = lastAudioUrl;
-  a.download = `tts-${Date.now()}.mp3`;
+  a.download = `tts-${Date.now()}.wav`;
   a.click();
 });
 
